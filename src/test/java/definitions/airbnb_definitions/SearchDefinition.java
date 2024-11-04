@@ -5,6 +5,8 @@ import pages.airbnb_comp.SearchComponent;
 
 import java.util.Objects;
 
+import static enums.TestConstants.IN_TEXT;
+import static enums.TestConstants.OUT_TEXT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchDefinition {
@@ -18,9 +20,9 @@ public class SearchDefinition {
 
     @When("^Select Check (In|Out)? date (.*?)$")
     public void selectCheckInDate(String inOut, String date) {
-        if (Objects.equals(inOut, "In")) {
+        if (Objects.equals(inOut, IN_TEXT.value)) {
             searchComponent.clickOnCheckInDate();
-        } else if (Objects.equals(inOut, "Out")) {
+        } else if (Objects.equals(inOut, OUT_TEXT.value)) {
             searchComponent.clickOnCheckOutDate();
         }
         searchComponent.selectDate(date);
@@ -28,9 +30,9 @@ public class SearchDefinition {
 
     @When("^Choose Check (In|Out)? date after (.*?) days from now$")
     public void selectCheckInDateAfterDays(String inOut, int days) {
-        if (Objects.equals(inOut, "In")) {
+        if (Objects.equals(inOut, IN_TEXT.value)) {
             searchComponent.clickOnCheckInDate();
-        } else if (Objects.equals(inOut, "Out")) {
+        } else if (Objects.equals(inOut, OUT_TEXT.value)) {
             searchComponent.clickOnCheckOutDate();
         }
         searchComponent.selectDateAfterDays(inOut, days);

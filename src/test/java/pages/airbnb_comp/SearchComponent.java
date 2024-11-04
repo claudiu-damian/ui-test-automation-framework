@@ -9,6 +9,7 @@ import utils.TextUtils;
 
 import java.util.Objects;
 
+import static enums.TestConstants.*;
 import static enums.context_keys.Data.*;
 
 @Log4j2
@@ -53,9 +54,9 @@ public class SearchComponent extends BasePage {
     public void addGuestsBasedOnRequiredNumberAndType(int numberOfGuests, String guestType) {
         ExecutionContext.addOrIncreaseNumberForKey(numberOfGuests, GUESTS);
         for (int i = 1; i <= numberOfGuests; i++) {
-            if (Objects.equals(guestType, "Adults") || Objects.equals(guestType, "Adult")) {
+            if (Objects.equals(guestType, ADULTS_TEXT.value) || Objects.equals(guestType, ADULT_TEXT.value)) {
                 guestsPanel.addAdult();
-            } else if (Objects.equals(guestType, "Children") || Objects.equals(guestType, "Child"))
+            } else if (Objects.equals(guestType, CHILDREN_TEXT.value) || Objects.equals(guestType, CHILD_TEXT.value))
                 guestsPanel.addChild();
         }
     }
@@ -63,9 +64,9 @@ public class SearchComponent extends BasePage {
     public void selectDateAfterDays(String inOrOut, int days) {
         String date = textUtils.getFutureDateInFormat(days);
         calendarPanel.selectDate(date);
-        if (inOrOut.equals("In"))
+        if (inOrOut.equals(IN_TEXT.value))
             ExecutionContext.put(CHECK_IN_DATE, date);
-        else if (inOrOut.equals("Out"))
+        else if (inOrOut.equals(OUT_TEXT.value))
             ExecutionContext.put(CHECK_OUT_DATE, date);
     }
 
@@ -74,7 +75,7 @@ public class SearchComponent extends BasePage {
         return (searchBar.validateDestination(ExecutionContext.get(DESTINATION).toString())
                 && searchBar.validateCheckInDate(textUtils.getDateInMonthFormat(ExecutionContext.get(CHECK_IN_DATE).toString()))
                 && searchBar.validateCheckOutDate(textUtils.getDateInMonthFormat(ExecutionContext.get(CHECK_OUT_DATE).toString()))
-                && searchBar.validateGuestsNumber(ExecutionContext.get(GUESTS).toString() + " guests")
+                && searchBar.validateGuestsNumber(ExecutionContext.get(GUESTS).toString() + GUESTS_TEXT.value)
         );
     }
 }

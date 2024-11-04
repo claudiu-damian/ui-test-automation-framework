@@ -1,17 +1,16 @@
 package enums;
 
+import lombok.AllArgsConstructor;
+
 import static utils.PropertyUtils.getSystemProperty;
 
+@AllArgsConstructor
 public enum Browser {
     CHROME("chrome"),
     HEADLESS("headless"),
     FIREFOX("firefox");
 
     private final String browser;
-
-    Browser(String browserType) {
-        this.browser = browserType;
-    }
 
     public String getDriverType() {
         String valueOfBrowserName = String.valueOf(getValueOfBrowserName(getSystemProperty("browser")));

@@ -12,6 +12,7 @@ Feature: Search destinations
     And Add 1 Child for search
     And Click on Search button
     Then Validate results from search bar
+    And Click on Search button
     And Validate that properties have the required guests number
 
   Scenario: Search for a destination, apply filter and validate the found properties

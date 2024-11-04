@@ -18,7 +18,6 @@ import java.util.List;
 import static enums.context_keys.Data.*;
 import static utils.ActionUtil.createCssSelectorAndHover;
 import static utils.DriverHelperUtil.*;
-import static utils.InitializationUtil.getDriver;
 import static utils.JavascriptExecutorUtil.scroll;
 
 @Log4j2
@@ -55,14 +54,14 @@ public class ResultAndPropertyPage extends BasePage {
     }
 
     private boolean validateSingleAttributeFromAllDisplayedProperties(Data attributeKey) {
-        scroll();
+        waitForPage();
         List<String> properties = getAllDisplayedProperties();
         for (String propertyElement : properties) {
             createCssSelectorAndClick(propertyElement);
-            Object[] windowHandles = getDriver().getWindowHandles().toArray();
+            Object[] windowHandles = driver.getWindowHandles().toArray();
             switchTabAndWaitForPage((String) windowHandles[1]);
             Allure.addAttachment("Screenshot", new ByteArrayInputStream(
-                    ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES)
+                    ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)
             ));
             log.info("Screenshot took and added to the report for property: " + propertyElement);
             if (validateAttributeNumberForProperty(attributeKey))
@@ -88,7 +87,7 @@ public class ResultAndPropertyPage extends BasePage {
     public void openTheFirstProperty() {
         List<String> properties = getAllDisplayedProperties();
         createCssSelectorAndClick(properties.get(0));
-        Object[] windowHandles = getDriver().getWindowHandles().toArray();
+        Object[] windowHandles = driver.getWindowHandles().toArray();
         switchTabAndWaitForPage((String) windowHandles[1]);
     }
 
@@ -105,7 +104,6 @@ public class ResultAndPropertyPage extends BasePage {
         List<String> properties = getAllDisplayedProperties();
         ExecutionContext.put(FIRST_PROPERTY, properties.get(0));
         createCssSelectorAndHover(properties.get(0));
-        log.info("hover");
     }
 
     public boolean checkThatStyleChangesAfterHover() {

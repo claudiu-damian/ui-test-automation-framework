@@ -7,6 +7,7 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
 import ru.yandex.qatools.htmlelements.element.TextInput;
 import utils.TextUtils;
 
+import static enums.LocatorConstants.VALUE_CSS_ATTRIBUTE;
 import static utils.DriverHelperUtil.waitForElementToBeClickable;
 
 @FindBy(id = "search-tabpanel")
@@ -44,6 +45,7 @@ public class SearchBar extends HtmlElement {
     }
 
     public void clickOnDestination() {
+        waitForElementToBeClickable(whereField);
         whereField.click();
     }
 
@@ -65,7 +67,7 @@ public class SearchBar extends HtmlElement {
 
     public boolean validateDestination(String expectedDestination) {
         waitForElementToBeClickable(whereField);
-        return whereField.getAttribute("value").equals(expectedDestination);
+        return whereField.getAttribute(VALUE_CSS_ATTRIBUTE.value).equals(expectedDestination);
     }
 
     public boolean validateCheckInDate(String expectedCheckInDate) {
