@@ -18,7 +18,6 @@ import java.util.List;
 import static enums.context_keys.Data.*;
 import static utils.ActionUtil.createCssSelectorAndHover;
 import static utils.DriverHelperUtil.*;
-import static utils.JavascriptExecutorUtil.scroll;
 
 @Log4j2
 public class ResultAndPropertyPage extends BasePage {
